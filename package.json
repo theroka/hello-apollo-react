@@ -1,0 +1,28 @@
+{
+  "name": "hello-apollo-react",
+  "version": "1.0.0",
+  "main": "src/index.tsx",
+  "author": "theroka <rokatron.rk@gmail.com>",
+  "license": "GPL3",
+  "private": true,
+  "devDependencies": {
+    "@types/graphql": "^14.2.3",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.5",
+    "apollo-cache-inmemory": "^1.6.2",
+    "apollo-client": "^2.6.3",
+    "apollo-link-http": "^1.5.15",
+    "browserify": "^16.3.0",
+    "graphql": "^14.4.2",
+    "graphql-tag": "^2.10.1",
+    "gulp": "^4.0.2",
+    "gulp-browserify": "^0.5.1",
+    "gulp-cli": "^2.2.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-typescript": "^5.0.1",
+    "react": "^16.8.6",
+    "react-apollo": "^2.5.8",
+    "react-dom": "^16.8.6",
+    "typescript": "3.5.3"
+  }
+}
