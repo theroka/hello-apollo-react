@@ -1,9 +1,31 @@
 import React from "react";
 import { render } from "react-dom";
-import { Provider, createClient, Query } from "urql"
+import { SubscriptionClient } from "subscriptions-transport-ws";
+import {
+  Provider,
+  createClient,
+  defaultExchanges,
+  subscriptionExchange,
+  useQuery,
+  useSubscription,
+  SubscriptionHandler
+} from "urql";
 import gql from "graphql-tag";
 
-const client = createClient({ url: "http://localhost:4000/" });
+const subscriptionClient = new SubscriptionClient(
+  "ws://localhost:4000/graphql",
+  {}
+);
+
+const client = createClient({
+  url: "http://localhost:4000/",
+  exchanges: [
+    ...defaultExchanges,
+    subscriptionExchange({
+      forwardSubscription: operation => subscriptionClient.request(operation)
+    })
+  ]
+});
 
 interface IBookProps {
   book: IBook;
@@ -30,21 +52,33 @@ const query = gql`
       title
       author
     }
-  }`;
+  }
+`;
 
-const Books = () => (
-  <Query query={query}>
-    {({ fetching, error, data }) => {
-      if (fetching) return <div>Loading...</div>;
-      if (error) return <div>Error!</div>;
-      return !data
-        ? null
-        : data.getBooks.map((book: IBook, i: number) => (
-            <Book key={i} book={book} />
-          ));
-    }}
-  </Query>
-);
+const subQuery = gql`
+  subscription BookSub {
+    bookAdded {
+      title
+      author
+    }
+  }
+`;
+
+const handleSubscription = ( books: IBook[] = [], response: { bookAdded: IBook } ) => {
+  return [response.bookAdded, ...books];
+};
+
+const Books = () => {
+  const [getBooks] = useQuery({ query });
+  const [newBooks] = useSubscription({ query: subQuery }, handleSubscription);
+
+  if (getBooks.fetching) return <p>Loading...</p>;
+  if (getBooks.error) return <p>Error!</p>;
+
+  let books = getBooks.data.getBooks.concat(newBooks.data ? newBooks.data : []);
+
+  return books.map((book: IBook, i: number) => <Book key={i} book={book} />);
+};
 
 const App = () => {
   return (
