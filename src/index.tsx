@@ -1,16 +1,9 @@
 import React from "react";
 import { render } from "react-dom";
-// @see: https://github.com/apollographql/react-apollo/blob/master/examples/typescript/src/index.tsx
-import { ApolloClient } from "apollo-client";
-import { createHttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloProvider, Query } from "react-apollo";
+import { Provider, createClient, Query } from "urql"
 import gql from "graphql-tag";
 
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: createHttpLink({ uri: "http://localhost:4000" })
-});
+const client = createClient({ url: "http://localhost:4000/" });
 
 interface IBookProps {
   book: IBook;
@@ -31,23 +24,18 @@ interface IBook {
   author: string;
 }
 
-interface IData {
-  getBooks: Array<IBook>;
-}
+const query = gql`
+  query {
+    getBooks {
+      title
+      author
+    }
+  }`;
 
 const Books = () => (
-  <Query<IData>
-    query={gql`
-      {
-        getBooks {
-          title
-          author
-        }
-      }
-    `}
-  >
-    {({ loading, error, data }) => {
-      if (loading) return <div>Loading...</div>;
+  <Query query={query}>
+    {({ fetching, error, data }) => {
+      if (fetching) return <div>Loading...</div>;
       if (error) return <div>Error!</div>;
       return !data
         ? null
@@ -60,9 +48,9 @@ const Books = () => (
 
 const App = () => {
   return (
-    <ApolloProvider client={client}>
+    <Provider value={client}>
       <Books />
-    </ApolloProvider>
+    </Provider>
   );
 };
 

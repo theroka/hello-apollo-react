@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/robin/.nvm/versions/node/v11.0.0/bin/node /usr/local/Cellar/yarn/1.9.4/libexec/bin/yarn.js add typescript@3.5
+  /Users/robin/.nvm/versions/node/v11.0.0/bin/node /usr/local/Cellar/yarn/1.9.4/libexec/bin/yarn.js add @types/urql
 
 PATH: 
   /Users/robin/.rvm/gems/ruby-2.2.7/bin:/Users/robin/.rvm/gems/ruby-2.2.7@global/bin:/Users/robin/.rvm/rubies/ruby-2.2.7/bin:/Users/robin/.nvm/versions/node/v11.0.0/bin:/Users/robin/.cargo/bin:/Users/robin/bin:/usr/local/bin:/usr/local/bin/python3:/Users/robin/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/robin/.rvm/bin
@@ -14,12 +14,17 @@ Platform:
   darwin x64
 
 Trace: 
-  SyntaxError: /Users/robin/Repositories/hello-apollo-react/package.json: Unexpected token } in JSON at position 710
-      at JSON.parse (<anonymous>)
-      at /usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:1130:59
-      at Generator.next (<anonymous>)
-      at step (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:92:30)
-      at /usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:103:13
+  Error: https://registry.yarnpkg.com/@types%2furql: Not found
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:64202:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:137468:22)
+      at Request.emit (events.js:182:13)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:138440:10)
+      at Request.emit (events.js:182:13)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:138362:12)
+      at Object.onceWrapper (events.js:273:13)
+      at IncomingMessage.emit (events.js:187:15)
+      at endReadableNT (_stream_readable.js:1094:12)
+      at process.internalTickCallback (internal/process/next_tick.js:72:19)
 
 npm manifest: 
   {
@@ -47,6 +52,8 @@ npm manifest:
       "react": "^16.8.6",
       "react-apollo": "^2.5.8",
       "react-dom": "^16.8.6",
+      "typescript": "3.5.3",
+      "urql": "^1.2.0"
     }
   }
 
@@ -2890,7 +2897,7 @@ Lockfile:
     version "0.6.0"
     resolved "https://registry.yarnpkg.com/process/-/process-0.6.0.tgz#7dd9be80ffaaedd4cb628f1827f1cbab6dc0918f"
   
-  prop-types@^15.6.2, prop-types@^15.7.2:
+  prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
     version "15.7.2"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
     dependencies:
@@ -3717,9 +3724,9 @@ Lockfile:
     version "0.0.6"
     resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   
-  typescript@^3.6.0-dev.20190724:
-    version "3.6.0-dev.20190725"
-    resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.0-dev.20190725.tgz#2c1d6802b85dd02ce9d0ef004f04ab592e6a53f6"
+  typescript@3.5.3:
+    version "3.5.3"
+    resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
   
   uglify-js@~2.2:
     version "2.2.5"
@@ -3830,6 +3837,15 @@ Lockfile:
     dependencies:
       punycode "1.3.2"
       querystring "0.2.0"
+  
+  urql@^1.2.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/urql/-/urql-1.2.0.tgz#82b5dc49a7c22c4640ed3415f1fb9f2f6bf71b36"
+    dependencies:
+      fast-json-stable-stringify "^2.0.0"
+      graphql-tag "^2.10.1"
+      prop-types "^15.6.0"
+      wonka "^3.0.0"
   
   use@^3.1.0:
     version "3.1.1"
@@ -3948,6 +3964,10 @@ Lockfile:
   window-size@0.1.0:
     version "0.1.0"
     resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
+  
+  wonka@^3.0.0:
+    version "3.1.1"
+    resolved "https://registry.yarnpkg.com/wonka/-/wonka-3.1.1.tgz#c948e8299468dd87eb0d6fc9b5647f7848a85af2"
   
   wordwrap@0.0.2:
     version "0.0.2"
